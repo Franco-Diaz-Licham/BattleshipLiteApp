@@ -20,7 +20,8 @@ namespace BattleshipLite
             Console.ReadLine();
         }
 
-        public static (string row, string col) ParseResponse(string response)
+        public static (string row, string col) ParseResponse(
+                string response)
         {
             string row = "";
             string col = "";
@@ -36,23 +37,20 @@ namespace BattleshipLite
             return (row, col);
         }
 
-        public static PlayerInfoModel AskForPlayerDetails(string playerTitle)
+        public static PlayerInfoModel AskForPlayerDetails(
+                string playerTitle)
         {
             PrintMessage($"Player information for: {playerTitle}");
-
             string name = AskForPlayerInput("What is your name: ");
 
-            var output = new PlayerInfoModel()
-            {
-                UserName = name,
-            };
-
+            var output = new PlayerInfoModel() { UserName = name };
             GameLogic.InitializeGrid(output);
 
             return output;
         }
 
-        public static void AskForShipPlacements(PlayerInfoModel player)
+        public static void AskForShipPlacements(
+                PlayerInfoModel player)
         {
             string row;
             string col;
@@ -72,29 +70,25 @@ namespace BattleshipLite
                     isLocationValid = GameLogic.ValidateGridLocation(row, col);
 
                     if (isLocationValid == false)
-                    {
                         PrintMessage("Location Invalid...");
-                    }
 
                 } while (isLocationValid == false);
 
                 isSpotOpen = GameLogic.IsSpotOpen(player, row, int.Parse(col));
 
                 if(isSpotOpen == true)
-                {
                     GameLogic.PlaceShip(player, row, int.Parse(col));
-                }
                 else
-                {
                     PrintMessage("Ship already exists in that location...");
-                }
 
             } while(player.ShipLocations.Count < 5);
 
             ClearScreen();
         }
 
-        public static void TakePlayerShotTurn(PlayerInfoModel player, PlayerInfoModel opponent)
+        public static void TakePlayerShotTurn(
+                PlayerInfoModel player, 
+                PlayerInfoModel opponent)
         {
             string row;
             string col;
@@ -112,22 +106,16 @@ namespace BattleshipLite
                 isLocationValid = GameLogic.ValidateGridLocation(row, col);
                 
                 if (isLocationValid == false)
-                {
                     PrintMessage("Location Invalid...");
-                }
 
             } while (isLocationValid == false);
 
             bool isShotValid = GameLogic.RecordPlayerShot(player, opponent, row, int.Parse(col));
 
             if (isShotValid)
-            {
                 PrintMessage("Result: SHOT! :)");
-            }
             else
-            {
                 PrintMessage("Result: MISS  :(");
-            }
 
             AskForPlayerInput("Press any key to continue game...");
         }
@@ -137,13 +125,15 @@ namespace BattleshipLite
             Console.Clear();
         }
 
-        public static void PrintMessage(string message)
+        public static void PrintMessage(
+                string message)
         {
             Console.WriteLine();
             Console.Write($"{message}");
         }
 
-        public static string AskForPlayerInput(string message)
+        public static string AskForPlayerInput(
+                string message)
         {
             PrintMessage($"{message}");
             string data = Console.ReadLine();
@@ -151,7 +141,8 @@ namespace BattleshipLite
             return data;
         }
 
-        public static void DisplayShotGrid(PlayerInfoModel player)
+        public static void DisplayShotGrid(
+                PlayerInfoModel player)
         {
             ClearScreen();
 
@@ -166,27 +157,20 @@ namespace BattleshipLite
                 }
 
                 if(gridSpot.Status == GridSpotStatus.Empty)
-                {
                     Console.Write($"  {gridSpot.SpotLetter}{gridSpot.SpotNumber}  ");
-                }
                 else if(gridSpot.Status == GridSpotStatus.Hit)
-                {
                     Console.Write("  X   ");
-                }
                 else if (gridSpot.Status == GridSpotStatus.Miss)
-                {
                     Console.Write("  O   ");
-                }
                 else
-                {
                     Console.Write("  ?   ");
-                }
             }
 
             Console.WriteLine();
         }
 
-        public static void IdentifiyWinner(PlayerInfoModel winner)
+        public static void IdentifiyWinner(
+                PlayerInfoModel winner)
         {
             PrintMessage($"Congratulations to { winner.UserName } for winning!");
             PrintMessage($"{winner.UserName} took {GameLogic.GetShotCount(winner)} shots to win!");

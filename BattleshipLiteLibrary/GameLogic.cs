@@ -26,15 +26,13 @@ namespace BattleshipLiteLibrary
             };
 
             foreach (var letter in rows)
-            {
-                foreach(var number in cols)
-                {
+                foreach (var number in cols)
                     AddGridSpot(player, letter, number);
-                }
-            }
         }
 
-        public static void PlaceShip(PlayerInfoModel player, string row, int col)
+        public static void PlaceShip(
+                PlayerInfoModel player, 
+                string row, int col)
         {
             GridSpotModel ship = new GridSpotModel()
             {
@@ -46,7 +44,11 @@ namespace BattleshipLiteLibrary
             player.ShipLocations.Add(ship);
         }
 
-        public static bool RecordPlayerShot(PlayerInfoModel player, PlayerInfoModel opponent, string row, int col)
+        public static bool RecordPlayerShot(
+                PlayerInfoModel player, 
+                PlayerInfoModel opponent, 
+                string row, 
+                int col)
         {
             bool isShotValid = IdentifyShotResult(opponent, row, col);
 
@@ -54,31 +56,28 @@ namespace BattleshipLiteLibrary
             {
                 UpdateShotGridStatus(player, GridSpotStatus.Hit, row, col);
                 UpdateShipStatus(opponent, GridSpotStatus.Sunk, row, col);
-
                 return true;
             }
-            else
-            {
-                UpdateShotGridStatus(player, GridSpotStatus.Miss, row, col);
 
-                return false;
-            }
+            UpdateShotGridStatus(player, GridSpotStatus.Miss, row, col);
+            return false;
         }
 
-        public static bool IsSpotOpen(PlayerInfoModel player, string row, int col)
+        public static bool IsSpotOpen(
+                PlayerInfoModel player, 
+                string row, 
+                int col)
         {
             foreach(var ship in player.ShipLocations)
-            {
-                if(ship.SpotLetter == row && ship.SpotNumber == col)
-                {
+                if (ship.SpotLetter == row && ship.SpotNumber == col)
                     return false;
-                }
-            }
 
             return true;
         }
 
-        public static bool ValidateGridLocation(string row, string col)
+        public static bool ValidateGridLocation(
+                string row, 
+                string col)
         {
             List<string> rows = new List<string>
             {
@@ -101,27 +100,27 @@ namespace BattleshipLiteLibrary
             int.TryParse(col, out int numb);
 
             if (rows.Contains(row) && cols.Contains(numb))
-            {
                 return true;
-            }
 
             return false;
         }
 
-        public static bool IdentifyShotResult(PlayerInfoModel opponent, string row, int col)
+        public static bool IdentifyShotResult(
+                PlayerInfoModel opponent, 
+                string row, 
+                int col)
         {
             foreach (GridSpotModel shipSpot in opponent.ShipLocations)
-            {
                 if (shipSpot.SpotLetter == row && shipSpot.SpotNumber == col)
-                {
                     return true;
-                }
-            }
 
             return false;
         }
 
-        private static void AddGridSpot(PlayerInfoModel player, string row, int col)
+        private static void AddGridSpot(
+                PlayerInfoModel player, 
+                string row, 
+                int col)
         {
             GridSpotModel gridSpot = new GridSpotModel()
             {
@@ -133,7 +132,11 @@ namespace BattleshipLiteLibrary
             player.ShotGrid.Add(gridSpot);
         }
 
-        private static void UpdateShipStatus(PlayerInfoModel player, GridSpotStatus gridStatus,string row, int col)
+        private static void UpdateShipStatus(
+                PlayerInfoModel player, 
+                GridSpotStatus gridStatus,
+                string row, 
+                int col)
         {
             foreach (GridSpotModel shipSpot in player.ShipLocations)
             {
@@ -145,7 +148,11 @@ namespace BattleshipLiteLibrary
             }
         }
 
-        private static void UpdateShotGridStatus(PlayerInfoModel player, GridSpotStatus gridStatus,string row, int col)
+        private static void UpdateShotGridStatus(
+                PlayerInfoModel player, 
+                GridSpotStatus 
+            gridStatus,string row, 
+                int col)
         {
             foreach (GridSpotModel Spot in player.ShotGrid)
             {
@@ -157,17 +164,15 @@ namespace BattleshipLiteLibrary
             }
         }
 
-        public static bool PlayerStillActive(PlayerInfoModel player)
+        public static bool PlayerStillActive(
+                PlayerInfoModel player)
         {
             bool isAlive = false;
 
             foreach (var ship in player.ShipLocations)
-            {
-                if(ship.Status != GridSpotStatus.Sunk)
-                {
+                if (ship.Status != GridSpotStatus.Sunk)
                     isAlive = true;
-                }
-            }
+
             return isAlive;
         }
 
@@ -176,12 +181,9 @@ namespace BattleshipLiteLibrary
             int count = 0;
 
             foreach (var shot in winner.ShotGrid)
-            {
-                if(shot.Status == GridSpotStatus.Miss || shot.Status == GridSpotStatus.Hit)
-                {
+                if (shot.Status == GridSpotStatus.Miss || 
+                    shot.Status == GridSpotStatus.Hit)
                     count += 1;
-                }
-            }
 
             return count;
         }

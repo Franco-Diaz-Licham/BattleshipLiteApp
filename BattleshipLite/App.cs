@@ -8,7 +8,6 @@ namespace BattleshipLite
         public static void Run()
         {
             ConsoleLogic.WelcomeMessage();
-
             PlayerInfoModel winner = null;
 
             PlayerInfoModel active = ConsoleLogic.AskForPlayerDetails("Player 1");
@@ -25,13 +24,9 @@ namespace BattleshipLite
                 bool doesGameContinue = GameLogic.PlayerStillActive(opponent);
 
                 if (doesGameContinue)
-                {
                     (active, opponent) = (opponent, active);
-                }
                 else
-                {
                     winner = active;
-                }
 
             } while (winner is null);
 
