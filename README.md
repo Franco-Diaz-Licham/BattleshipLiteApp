@@ -4,7 +4,7 @@ Here are some spanshots of the game:
 
 1. Player one can enter their name and their ship's position:
 
-![WelcomePageAndFirstPlayer](https://github.com/Franco-Diaz-Licham/BattleshipLiteApp/assets/138960498/068e884b-e5e7-4177-b197-3a54d0949995)
+![WelcomePageAndFirstPlayer](https://github.com/Franco-Diaz-Licham/BattleshipLiteApp/assets/138960498/30f3a26e-9f96-4150-9e89-c85f2ea96833)
 
 2. Player two can enter their name and their ship's position:
 
