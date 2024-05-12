@@ -1,6 +1,6 @@
 Battleship Lite Application is a .NET Framework 4.7.2 console desktop application that allows users to enter their name, their ship's positions and play battleship until there is a winner. 
 
-Here are some spanshots of the game:
+Here are some snapshots of the game:
 
 1. Player one can enter their name and their ship's position:
 
