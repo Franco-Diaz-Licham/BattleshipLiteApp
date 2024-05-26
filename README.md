@@ -10,5 +10,6 @@ Here are some snapshots of the game:
 6. The game continues and player one was the winner.
 
 <p align="center">
-  <img src="https://github.com/Franco-Diaz-Licham/BattleshipLiteApp/assets/138960498/262cf8d8-240e-46eb-8885-8cddab2db297" />
+  <img src="https://github.com/Franco-Diaz-Licham/BattleshipLiteApp/assets/138960498/43ecb1f4-1971-4691-94fe-ac7354c7307d" />
 </p>
+
